@@ -1,0 +1,47 @@
+<div class="imagen-con-texto"
+    style="background-image: url('https://fitgeneration.es/wp-content/uploads/2023/02/carlos-mejias.jpg')">
+    <div class="overlay">
+        <p>Entrenador personal y nutricionista especializado en culturismo y powerlifting. Fundador de Musclespain y la
+            academia TREN. <br><br>Máster en Suplementación Deportiva y Farmacología en el Deporte.</p>
+    </div>
+</div>
+
+<style>
+    .imagen-con-texto {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: all 0.3s ease;
+        border-radius: 5px;
+    }
+
+    .imagen-con-texto .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .imagen-con-texto:hover .overlay {
+        opacity: 1;
+    }
+
+    .imagen-con-texto .overlay p {
+        color: white;
+        font-size: 14px;
+        text-align: start;
+        font-family: 'Montserrat', Sans-serif;
+        padding: 5%;
+    }
+</style>

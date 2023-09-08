@@ -1,0 +1,158 @@
+<div class="content">
+    <div>
+        <!-- El atributo checked es para que aparezca abierto por defecto -->
+        <input type="checkbox" id="question1" name="q" class="questions" checked>
+        <div class="plus">+</div>
+        <label for="question1" class="question">
+            Pregunta 1
+        </label>
+        <div class="answers">
+            Contenido
+        </div>
+    </div>
+    <div>
+        <input type="checkbox" id="question2" name="q" class="questions">
+        <div class="plus">+</div>
+        <label for="question2" class="question">
+            Pregunta 2
+        </label>
+        <div class="answers">
+            Contenido
+        </div>
+    </div>
+</div>
+
+<style>
+    .content {
+        width: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .centerplease {
+        margin: 0 auto;
+        max-width: 270px;
+        font-size: 40px;
+    }
+
+    /*Question*/
+    .question {
+        position: relative;
+        background: #0A0A0A;
+        margin: 0;
+        padding: 10px 10px 10px 50px;
+        display: block;
+        width: auto;
+        cursor: pointer;
+        font-family: "Montserrat";
+        text-transform: Uppercase;
+        font-size: 1.2rem;
+        color: white;
+        line-height: 1.2em;
+    }
+
+
+
+    /*Answer*/
+    .answers {
+        padding: 0px 15px;
+        width: 100% !important;
+        height: 0;
+        overflow: hidden;
+        z-index: -1;
+        position: relative;
+        opacity: 0;
+        -webkit-transition: .3s ease;
+        -moz-transition: .3s ease;
+        -o-transition: .3s ease;
+        transition: .3s ease;
+        font-family: "Poppins";
+        font-size: 1rem;
+        line-height: 1.2em;
+        color: black;
+        background: white;
+        z-index: 9;
+    }
+
+    .answers li {
+        list-style: auto;
+        margin: 10px 0;
+    }
+
+    .answers ol {
+        padding: inherit;
+        margin: inherit;
+    }
+
+    .answers strong {
+        font-weight: bold;
+    }
+
+    .answers p {
+        width: 90%;
+    }
+
+    .questions:checked~.answers {
+        height: auto;
+        opacity: 1;
+        padding: 15px;
+
+    }
+
+    /*FAQ Toggle*/
+    .plus {
+        position: absolute;
+        margin-left: 10px;
+        z-index: 5;
+        font-size: 2em;
+        line-height: 100%;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        -webkit-transition: .3s ease;
+        -moz-transition: .3s ease;
+        -o-transition: .3s ease;
+        transition: .3s ease;
+        color: white;
+
+    }
+
+
+    .questions:checked~.plus {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+
+    }
+
+    .questions {
+        display: none;
+
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .question {
+            font-size: 1rem;
+        }
+
+        .answers {
+            font-size: 0.8rem;
+        }
+
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.questions').change(function () {
+            if ($(this).is(':checked')) {
+                $('.questions').not(this).prop('checked', false);
+            }
+        });
+    });
+</script>

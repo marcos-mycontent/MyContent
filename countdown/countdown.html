@@ -1,0 +1,97 @@
+<div id="countdown-wrapper">
+    <span id="pre-countdown">Fin de matrícula ordinaria:&nbsp</span>
+    <span id="countdown"></span>
+</div>
+
+<style>
+    #countdown-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    #countdown-wrapper p {
+        line-height: 23px;
+        text-align: center;
+    }
+
+    #countdown-wrapper #pre-countdown {
+        font-size: 18px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        font-style: italic;
+        color: black;
+    }
+
+    #countdown-wrapper #countdown {
+        font-size: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        font-style: italic;
+        color: black;
+        display: inline-block;
+    }
+
+    @media screen and (max-width: 768px) {
+        #countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 7px;
+        }
+    }
+</style>
+
+<script>
+    // Función para obtener la hora actual desde la API.
+    const obtenerHoraActual = async () => {
+        const respuesta = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC');
+        const data = await respuesta.json();
+        return new Date(data.utc_datetime);
+    }
+
+    // Función para calcular la diferencia entre la hora actual y la fecha/hora de finalización.
+    const calcularDiferencia = (horaActual) => {
+        const fechaFinal = new Date('2023-09-30T22:59:59Z');
+        const diferencia = fechaFinal - horaActual;
+
+        const segundos = Math.floor((diferencia / 1000) % 60);
+        const minutos = Math.floor((diferencia / 1000 / 60) % 60);
+        const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+
+        return {
+            dias,
+            horas,
+            minutos,
+            segundos
+        };
+    }
+
+    // Función para actualizar la interfaz con la información del countdown.
+    const actualizarUI = ({ dias, horas, minutos, segundos }) => {
+        document.getElementById('countdown').innerText = `${dias}: ${horas.toString().padStart(2, '0')}: ${minutos.toString().padStart(2, '0')} :${segundos.toString().padStart(2, '0')}`;
+    }
+
+    // Función principal que inicia el conteo.
+    const iniciarConteo = async () => {
+        const horaActual = await obtenerHoraActual();
+        let diferencia = calcularDiferencia(horaActual);
+        actualizarUI(diferencia);
+
+        // Actualización cada segundo
+        setInterval(() => {
+            const nuevaHora = new Date();
+            diferencia = calcularDiferencia(nuevaHora);
+            actualizarUI(diferencia);
+        }, 1000);
+    }
+
+    // Ejecutar la función principal al cargar el documento.
+    document.addEventListener('DOMContentLoaded', iniciarConteo);
+
+
+
+</script>
